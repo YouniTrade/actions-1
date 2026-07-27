@@ -31,7 +31,7 @@ jobs:
       - name: run script
         run: |
           grep -i "dragon" dragon.txt
-          echo ${USERNAME}
+          echo ${{vars.USERNAME}}
           echo ${{ secrets.SOME_RANDOM_PASSWORD }}
   deploy-job:
     needs: test-job
