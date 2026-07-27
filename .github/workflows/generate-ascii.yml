@@ -1,7 +1,7 @@
 name: Generate ascii workflow
 on: push
 jobs:
-  job:
+  build-job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -12,3 +12,16 @@ jobs:
           ./asci-script.sh
       - name: List files
         run: ls
+
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: sleep for 10 seconds
+        run: sleep 10
+      - name: run script
+        run: grep -i "dragon" dragon.txt
+  deploy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test if dragon is visible
+        run: cat dragon.txt
