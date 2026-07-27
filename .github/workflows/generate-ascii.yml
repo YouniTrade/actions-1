@@ -10,20 +10,28 @@ jobs:
         run: |
           chmod +x asci-script.sh
           ./asci-script.sh
-      - name: List files
-        run: ls
-
+      - name: Upload the dragon.txt file
+        uses: actions/upload-artifact@v7
+        with:
+          name: dragon-artifact
+          path: dragon.txt
   test-job:
     needs: build-job
     runs-on: ubuntu-latest
     steps:
-      - name: sleep for 10 seconds
-        run: sleep 10
+      - name: download the dragon.txt file
+        uses: actions/download-artifact@v7
+        with:
+          name: dragon-artifact
       - name: run script
         run: grep -i "dragon" dragon.txt
   deploy-job:
     needs: build-job
     runs-on: ubuntu-latest
     steps:
+      - name: download the dragon.txt file
+        uses: actions/download-artifact@v7
+        with:
+          name: dragon-artifact
       - name: Test if dragon is visible
         run: cat dragon.txt
