@@ -6,9 +6,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-      - name: Run script
-        run: sudo apt-get update && sudo apt-get install -y cowsay
-      - name: Run asci output
-        run: cowsay -f dragon "Run for cover i am a DRAGON" >> dragon.txt
+      - name: run script
+        run: ./asci-script.sh
       - name: List files
         run: ls
