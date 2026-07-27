@@ -1,5 +1,7 @@
 name: Generate ascii workflow
 on: push
+env:
+  JOB: Software Engineer
 jobs:
   build-job:
     runs-on: ubuntu-latest
@@ -10,12 +12,15 @@ jobs:
         run: |
           chmod +x asci-script.sh
           ./asci-script.sh
+          echo ${JOB}
       - name: Upload the dragon.txt file
         uses: actions/upload-artifact@v7
         with:
           name: dragon-artifact
           path: dragon.txt
   test-job:
+    env:
+      NAME: AL batal
     needs: build-job
     runs-on: ubuntu-latest
     steps:
@@ -24,9 +29,11 @@ jobs:
         with:
           name: dragon-artifact
       - name: run script
-        run: grep -i "dragon" dragon.txt
+        run: |
+          grep -i "dragon" dragon.txt
+          echo ${NAME}
   deploy-job:
-    needs: build-job
+    needs: test-job
     runs-on: ubuntu-latest
     steps:
       - name: download the dragon.txt file
@@ -34,4 +41,8 @@ jobs:
         with:
           name: dragon-artifact
       - name: Test if dragon is visible
-        run: cat dragon.txt
+        env:
+          NAME: El Mahfoud Bouatim
+        run: |
+          cat dragon.txt
+          echo ${NAME}
