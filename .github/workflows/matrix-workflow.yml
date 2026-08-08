@@ -5,16 +5,13 @@ on:
 
 jobs:
   ubuntu-job:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
       - name: Display dummy message
-        run: echo "Installing on ubuntu"
-  windows-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-      - name: Display dummy message
-        run: echo "Installing on windows"
+        run: echo "Installing on ${{ matrix.os }}"
