@@ -38,6 +38,9 @@ jobs:
           echo ${{vars.USERNAME}}
           echo ${{ secrets.SOME_RANDOM_PASSWORD }}
   deploy-job:
+    concurrency:
+      group: prod-deployment
+      cancel-in-progress: true
     needs: test-job
     runs-on: ubuntu-latest
     steps:
