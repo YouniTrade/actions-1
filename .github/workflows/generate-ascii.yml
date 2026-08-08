@@ -1,8 +1,9 @@
 name: Generate ascii workflow
 #on: push
 on:
-  schedule:
-    - cron: "*/1 * * * *"
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "*/1 * * * *"
 env:
   JOB: Software Engineer
 jobs:
