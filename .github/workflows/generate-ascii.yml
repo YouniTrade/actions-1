@@ -51,3 +51,4 @@ jobs:
         run: |
           cat dragon.txt
           echo ${NAME}
+          sleep 600s
