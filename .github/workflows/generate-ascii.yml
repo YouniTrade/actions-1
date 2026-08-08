@@ -49,6 +49,7 @@ jobs:
         with:
           name: dragon-artifact
       - name: Test if dragon is visible
+        timeout-minutes: 1
         env:
           NAME: El Mahfoud Bouatim
         run: |
